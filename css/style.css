@@ -1,0 +1,332 @@
+/* =====================================================
+   Expense & Budget Visualizer — Base Styles (Task 2.1)
+   ===================================================== */
+
+/* Box-sizing reset */
+* {
+  box-sizing: border-box;
+}
+
+/* CSS Custom Properties — Light Theme */
+:root {
+  --bg-page: #f9f9f9;
+  --bg-card: #ffffff;
+  --text-main: #333333;
+  --text-muted: #888888;
+  --accent: #3498db;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --radius: 8px;
+  --transition: 0.2s ease;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-page: #1a1a2e;
+  --bg-card: #16213e;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --accent: #5dade2;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Base Body Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Main Content Wrapper */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* =====================================================
+   Expense & Budget Visualizer — Component Styles (Task 2.2)
+   ===================================================== */
+
+/* Header — mobile-first: stacked vertically, centered */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem 0.75rem;
+}
+header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  margin: 0;
+  /* Allow title to wrap on very narrow screens without overflow */
+  word-break: break-word;
+}
+#theme-toggle {
+  /* On mobile: inline, centered below the title */
+  position: static;
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--text-muted);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  min-height: 44px;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Cards (sections) */
+section {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+#balance-display {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+#balance-card {
+  text-align: center;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 0.5rem;
+}
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: var(--bg-card);
+  color: var(--text-main);
+  transition: border-color var(--transition), background var(--transition);
+  box-sizing: border-box;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+button[type="submit"] {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+button[type="submit"]:hover {
+  background: #2176ae;
+}
+
+/* Error messages */
+.error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.hidden {
+  display: none;
+}
+
+/* Add category row */
+#add-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  align-items: flex-start;
+}
+#new-category {
+  flex: 1;
+  min-width: 150px;
+}
+#add-category-btn {
+  min-height: 44px;
+  padding: 0 1rem;
+  background: var(--bg-card);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+#add-category-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+#category-error {
+  width: 100%;
+}
+
+/* Transaction list */
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(136,136,136,0.2);
+}
+.transaction-item:last-child {
+  border-bottom: none;
+}
+.transaction-info {
+  flex: 1;
+}
+.transaction-name {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+}
+.transaction-amount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3498db;
+  margin: 0 0 0.25rem;
+}
+.category-badge {
+  display: inline-block;
+  background: rgba(136,136,136,0.15);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+}
+.transaction-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+.delete-btn {
+  min-height: 36px;
+  padding: 0.3rem 0.7rem;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 1rem;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Sort select */
+#sort-select {
+  margin-bottom: 1rem;
+}
+
+/* Chart card */
+#chart-card canvas {
+  max-width: 100%;
+}
+#chart-empty {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.95rem;
+}
+
+/* =====================================================
+   Expense & Budget Visualizer — Responsive Layout (Task 2.3)
+   ===================================================== */
+
+/* Default (mobile-first): stacked vertically */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.row section {
+  /* each card in the row is full width on mobile */
+  width: 100%;
+}
+
+/* Desktop two-column layout at 768px+ */
+@media (min-width: 768px) {
+  /* Restore desktop header: title centered, toggle pinned to the right */
+  header {
+    flex-direction: row;
+    justify-content: center;
+    padding: 1.5rem 1rem 0.5rem;
+    position: relative;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+  #theme-toggle {
+    position: absolute;
+    right: 1rem;
+  }
+
+  .row {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .row section {
+    flex: 1;
+    min-width: 0; /* prevents flex children from overflowing */
+  }
+}
